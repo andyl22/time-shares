@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import Footer from '../components/Footer/Footer';
 import styles from '../styles/Home.module.scss';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Time Shares</title>
         <meta
@@ -15,10 +14,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1>Time Shares</h1>
+        
       </main>
-
-      <Footer />
-    </div>
+    </>
   );
 }
