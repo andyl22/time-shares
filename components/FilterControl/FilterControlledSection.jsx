@@ -20,7 +20,12 @@ export default function FilterControlledSection() {
   const mappedItems = sampleItems
     .filter((item) => item.category === activeFilter)
     .map((item) => (
-      <ItemDisplay name={item.name} key={item.id} imgSrc={'/images/cat.jpg'} />
+      <ItemDisplay
+        name={item.name}
+        key={item.id}
+        id={item.id}
+        imgSrc={'/images/cat.jpg'}
+      />
     ));
 
   return (

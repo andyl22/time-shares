@@ -4,14 +4,14 @@ import styles from './ItemDisplay.module.scss';
 import PropTypes from 'prop-types';
 
 export default function ItemDisplay(props) {
-  const { name, imgSrc } = props;
+  const { name, imgSrc, id } = props;
 
   return (
-    <Link href={'/'}>
+    <Link href={`/entity/${id}`}>
       <a className={styles.mappedItem}>
         <p className={styles.itemName}>{name}</p>
         <Image
-          src="/images/cat.jpg"
+          src={imgSrc}
           width="300"
           height="220px"
           className={styles.image}
@@ -23,5 +23,6 @@ export default function ItemDisplay(props) {
 
 ItemDisplay.propTypes = {
   name: PropTypes.string,
-  pic: PropTypes.string
+  imgSrc: PropTypes.string,
+  id: PropTypes.string
 };
