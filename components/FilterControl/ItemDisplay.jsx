@@ -1,4 +1,5 @@
 import styles from './ItemDisplay.module.scss';
+import PropTypes from 'prop-types';
 
 export default function ItemDisplay(props) {
   const { item } = props;
@@ -9,3 +10,9 @@ export default function ItemDisplay(props) {
     </div>
   );
 }
+
+ItemDisplay.propTypes = {
+  item: {
+    name: PropTypes.string
+  }
+};

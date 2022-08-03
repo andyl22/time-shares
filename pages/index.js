@@ -1,12 +1,21 @@
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.scss';
 
-export default function Home() {
+export function getStaticProps() {
+  return {
+    props: {
+      // eslint-disable-next-line no-undef
+      accessKey: process.env.UNSPLASH_ACCESS
+    }
+  };
+}
+
+export default function Home(props) {
+  const { accessKey } = props;
   const [pics, setPics] = useState();
-  const accessKey = 'y7CUOcVNwrD1FoUXE8VXn-1a_6NnbnKCmyQ7L6ICoJE';
-  const secret = '6qsnSRFklAVoBO2egFFRhhRS8JSOYHPAlofmggnDxVI';
 
   useEffect(() => {
     const getData = async () =>
@@ -41,3 +50,7 @@ export default function Home() {
     </>
   );
 }
+
+Home.propTypes = {
+  accessKey: PropTypes.string
+};

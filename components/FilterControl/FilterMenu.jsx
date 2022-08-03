@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './FilterMenu.module.scss';
+import PropTypes from 'prop-types';
 
 export default function FilterMenu(props) {
-  // eslint-disable-next-line react/prop-types
   const { changeActiveFilter, categories } = props;
   const [activeFilter, setActiveFilter] = useState(categories[0]);
 
@@ -11,9 +11,6 @@ export default function FilterMenu(props) {
     changeActiveFilter(option);
   };
 
-  useEffect(() => {}, []);
-
-  // eslint-disable-next-line react/prop-types
   const mappedFilterOptions = categories.map((option) => {
     return (
       <div
@@ -30,6 +27,7 @@ export default function FilterMenu(props) {
           name={option}
           checked={option === activeFilter}
           disabled={option === activeFilter}
+          readOnly
         />
         <label htmlFor={option}>{option}</label>
       </div>
@@ -43,3 +41,8 @@ export default function FilterMenu(props) {
     </div>
   );
 }
+
+FilterMenu.propTypes = {
+  changeActiveFilter: PropTypes.func,
+  categories: PropTypes.array
+};
