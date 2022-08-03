@@ -1,0 +1,43 @@
+.filterMenu {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  min-height: 100%;
+  .menuTitle {
+    padding-left: 1rem;
+    border-bottom: 1px solid lightgray;
+    font-size: 1.8rem;
+  }
+  .filterOptions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid lightgray;
+    .checkboxContainer {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      &:hover {
+        background: rgb(0, 36, 104);
+        color: white;
+      }
+      input {
+        flex: 0;
+        margin: 0.6rem 0.5rem 0.5rem 0.5rem;
+      }
+      label {
+        flex: 1;
+        cursor: pointer;
+      }
+    }
+    .activeFilter {
+      background: rgb(35, 96, 207);
+      color: white;
+      &:hover {
+        background: rgb(35, 96, 207);
+        color: white;
+      }
+    }
+  }
+}

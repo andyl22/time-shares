@@ -1,0 +1,19 @@
+.filteredSection {
+  display: flex;
+  min-width: 100%;
+  min-height: 100%;
+  .filterContent {
+    flex: 1;
+    padding-top: 2rem;
+    .sectionTitle {
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+}
+
+.mappedItemsContainer {
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+}

@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.scss';
 
 export default function Home() {
@@ -7,13 +8,16 @@ export default function Home() {
   const accessKey = 'y7CUOcVNwrD1FoUXE8VXn-1a_6NnbnKCmyQ7L6ICoJE';
   const secret = '6qsnSRFklAVoBO2egFFRhhRS8JSOYHPAlofmggnDxVI';
 
-  const getData = async () =>
-    fetch(
-      `https://api.unsplash.com/search/photos?query=pets&client_id=${accessKey}`
-    )
-      .then((res) => res.json())
-      .then((res) => res.results[0])
-      .then((res) => setPics(<img src={res.urls.small} />));
+  useEffect(() => {
+    const getData = async () =>
+      fetch(
+        `https://api.unsplash.com/search/photos?query=pets&client_id=${accessKey}`
+      )
+        .then((res) => res.json())
+        .then((res) => res.results[Math.floor(Math.random() * 10)])
+        .then((res) => setPics(<img src={res.urls.small} />));
+    getData();
+  }, []);
 
   return (
     <>
@@ -27,8 +31,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <button onClick={getData}>Click Me</button>
         {pics}
+        <Link href="/browse">
+          <a>
+            <button className={styles.buyNow}>Buy a time share now!</button>
+          </a>
+        </Link>
       </main>
     </>
   );
