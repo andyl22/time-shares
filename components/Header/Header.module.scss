@@ -5,4 +5,12 @@
   border-bottom: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+  background: rgba(1, 50, 53, 0.9);
+  filter: sepia(70%);
+  font-weight: 600;
+  color: white;
+  &:hover {
+    filter: sepia(30%);
+    color: rgb(216, 213, 213);
+  }
 }

@@ -19,17 +19,21 @@ export default function FilterControlledSection() {
 
   const mappedItems = sampleItems
     .filter((item) => item.category === activeFilter)
-    .map((item) => <ItemDisplay item={item} key={item.id} />);
+    .map((item) => (
+      <ItemDisplay name={item.name} key={item.id} imgSrc={'/images/cat.jpg'} />
+    ));
 
   return (
-    <div className={styles.filteredSection}>
-      <FilterMenu
-        changeActiveFilter={changeActiveFilter}
-        categories={categories}
-      />
-      <div className={styles.filterContent}>
-        <h1 className={styles.sectionTitle}>{activeFilter}</h1>
-        <div className={styles.mappedItemsContainer}>{mappedItems}</div>
+    <div className={styles.controlSection}>
+      <h1 className={styles.sectionTitle}>{activeFilter}</h1>
+      <div className={styles.filteredSection}>
+        <FilterMenu
+          changeActiveFilter={changeActiveFilter}
+          categories={categories}
+        />
+        <div className={styles.filterContent}>
+          <div className={styles.mappedItemsContainer}>{mappedItems}</div>
+        </div>
       </div>
     </div>
   );

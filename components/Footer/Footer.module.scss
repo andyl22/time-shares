@@ -1,8 +1,12 @@
 .footer {
   display: flex;
   flex: 0;
-  padding: 1rem 0;
+  padding: 1.3rem 0;
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+  background: rgb(3, 68, 71);
+  filter: sepia(70%);
+  font-weight: 600;
+  color: white;
 }

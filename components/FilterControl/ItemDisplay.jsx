@@ -1,18 +1,27 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import styles from './ItemDisplay.module.scss';
 import PropTypes from 'prop-types';
 
 export default function ItemDisplay(props) {
-  const { item } = props;
+  const { name, imgSrc } = props;
 
   return (
-    <div key={item.name} className={styles.mappedItem}>
-      <p>{item.name}</p>
-    </div>
+    <Link href={'/'}>
+      <a className={styles.mappedItem}>
+        <p className={styles.itemName}>{name}</p>
+        <Image
+          src="/images/cat.jpg"
+          width="300"
+          height="220px"
+          className={styles.image}
+        />
+      </a>
+    </Link>
   );
 }
 
 ItemDisplay.propTypes = {
-  item: {
-    name: PropTypes.string
-  }
+  name: PropTypes.string,
+  pic: PropTypes.string
 };
