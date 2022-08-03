@@ -16,9 +16,8 @@
     border-radius: 1rem;
   }
   &:hover {
-    background: rgba(2, 2, 2, 0.5);
+    transform: scale(1.1);
     .image {
-      transform: scale(1.5);
       border-radius: 1rem;
     }
   }

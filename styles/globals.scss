@@ -36,13 +36,15 @@ a {
 }
 
 button {
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   margin: 1rem;
   border-radius: 1rem;
   border: none;
   background: rgb(89, 152, 247);
   &:hover {
     background: rgb(41, 126, 255);
+    transform: scale(1.1);
+    transition: 0.1s ease-in;
   }
   color: white;
   font-size: 1.2rem;
