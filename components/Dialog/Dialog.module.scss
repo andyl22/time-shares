@@ -1,0 +1,30 @@
+.modalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 99;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgb(0, 0, 0, 0.2);
+  .dialogContainer {
+    width: fit-content;
+    height: fit-content;
+    min-width: 300px;
+    min-height: 300px;
+    background: white;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 1rem;
+    .dialogHeaderContainer {
+      display: flex;
+      padding: 0 1rem;
+    }
+    .dialogContentContainer {
+      padding: 1rem;
+    }
+  }
+}

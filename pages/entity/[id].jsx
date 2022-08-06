@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Calendar from '../../components/Calendar/Calendar';
 import styles from './entity.module.scss';
 
 export default function Entity() {
@@ -13,7 +14,7 @@ export default function Entity() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.browsePage}>
-        <div>Time share booker</div>
+        <Calendar />
       </main>
     </>
   );
