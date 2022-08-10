@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import styles from './Dialog.module.scss';
 import PropTypes from 'prop-types';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Dialog(props) {
   const { dialogHeader, dialogContent, show, hideDialog } = props;
@@ -14,7 +15,9 @@ export default function Dialog(props) {
       >
         <div className={styles.dialogHeaderContainer}>
           <h1>{dialogHeader}</h1>
-          <button onClick={hideDialog}>test</button>
+          <button onClick={hideDialog}>
+            <CloseIcon fontSize="small" />
+          </button>
         </div>
         <div className={styles.dialogContentContainer}>{dialogContent}</div>
       </div>
