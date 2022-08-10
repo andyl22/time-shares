@@ -26,8 +26,9 @@ export default function CalendarDay() {
     document.addEventListener('mouseover', handleDrag);
     document.addEventListener(
       'mouseup',
-      () => {
+      (e) => {
         document.removeEventListener('mouseover', handleDrag);
+        toggleDialog(e);
       },
       { once: true }
     );
@@ -38,7 +39,7 @@ export default function CalendarDay() {
     <li
       className={`${styles.timeUnit} ${
         time >= timeSlice[0] && time <= timeSlice[1] && styles.color
-      }`}
+      } ${time <= timeSlice[0] && time >= timeSlice[1] && styles.color}`}
       key={time}
       value={time}
     >
@@ -47,7 +48,7 @@ export default function CalendarDay() {
   ));
 
   return (
-    <div className={styles.calendarDayContainer} onClick={toggleDialog}>
+    <div className={styles.calendarDayContainer}>
       <div
         className={styles.hourTimes}
         onMouseDown={listenToDrag}
@@ -61,7 +62,9 @@ export default function CalendarDay() {
         show={showDialog}
         hideDialog={toggleDialog}
         dialogConfirmAction={toggleDialog}
-        dialogCancelAction={() => {}}
+        dialogCancelAction={() => {
+          setTimeSlice([]);
+        }}
       />
     </div>
   );

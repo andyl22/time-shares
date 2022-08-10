@@ -4,18 +4,24 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function Dialog(props) {
-  const { dialogHeader, dialogContent, show, hideDialog } = props;
+  const { dialogHeader, dialogContent, show, hideDialog, dialogCancelAction } =
+    props;
+
+  const cancelDialog = (e) => {
+    hideDialog(e);
+    dialogCancelAction();
+  };
 
   if (!show) return null;
   return createPortal(
-    <div className={styles.modalContainer} onClick={hideDialog}>
+    <div className={styles.modalContainer} onClick={cancelDialog}>
       <div
         className={styles.dialogContainer}
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.dialogHeaderContainer}>
           <h1>{dialogHeader}</h1>
-          <button onClick={hideDialog}>
+          <button onClick={cancelDialog}>
             <CloseIcon fontSize="small" />
           </button>
         </div>
@@ -30,5 +36,6 @@ Dialog.propTypes = {
   dialogHeader: PropTypes.string,
   dialogContent: PropTypes.element,
   show: PropTypes.bool,
-  hideDialog: PropTypes.func
+  hideDialog: PropTypes.func,
+  dialogCancelAction: PropTypes.func
 };
