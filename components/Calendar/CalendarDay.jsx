@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './CalendarDay.module.scss';
 import Dialog from '../Dialog/Dialog';
 import { useRef } from 'react';
+import { postHTTP } from '../../utilities/api';
 
 export default function CalendarDay() {
   const [showDialog, setShowDialog] = useState(false);
@@ -63,7 +64,15 @@ export default function CalendarDay() {
         show={showDialog}
         hideDialog={toggleDialog}
         dialogConfirmAction={() => {
-          console.log('cookies');
+          postHTTP('/createNewBooking', {
+            name: 'test',
+            description: 'test',
+            rate: 35,
+            image: 'test',
+            category: 'test'
+          })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
         }}
         dialogCancelAction={() => {
           setTimeSlice([]);

@@ -12,10 +12,10 @@ const Entity = new Schema({
     required: [true, 'Please provide a description for this entity.'],
     maxlength: [2000, 'Item description must be less than 2000 characters']
   },
-  price: {
+  rate: {
     type: Number,
-    required: [true, 'Please provide a price for this entity.'],
-    maxlength: [2000, 'Provide a price for this entity.']
+    required: [true, 'Please provide a rate for this entity.'],
+    maxlength: [2000, 'Provide a rate for this entity.']
   },
   image: {
     type: String,
