@@ -49,6 +49,7 @@ export default function CalendarDay() {
 
   return (
     <div className={styles.calendarDayContainer}>
+      <div className={styles.dayHeader}>Date Here</div>
       <div
         className={styles.hourTimes}
         onMouseDown={listenToDrag}
