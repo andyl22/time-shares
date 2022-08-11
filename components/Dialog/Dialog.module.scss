@@ -41,5 +41,12 @@
     .dialogContentContainer {
       padding: 1rem;
     }
+    .dialogActionButtons {
+      button {
+        &:hover {
+          transform: none;
+        }
+      }
+    }
   }
 }

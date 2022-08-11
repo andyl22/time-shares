@@ -4,12 +4,23 @@ import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function Dialog(props) {
-  const { dialogHeader, dialogContent, show, hideDialog, dialogCancelAction } =
-    props;
+  const {
+    dialogHeader,
+    dialogContent,
+    show,
+    hideDialog,
+    dialogCancelAction,
+    dialogConfirmAction
+  } = props;
 
   const cancelDialog = (e) => {
     hideDialog(e);
     dialogCancelAction();
+  };
+
+  const confirmDialog = (e) => {
+    hideDialog(e);
+    dialogConfirmAction();
   };
 
   if (!show) return null;
@@ -26,6 +37,10 @@ export default function Dialog(props) {
           </button>
         </div>
         <div className={styles.dialogContentContainer}>{dialogContent}</div>
+        <div className={styles.dialogActionButtons}>
+          <button onClick={confirmDialog}>Confirm</button>
+          <button onClick={cancelDialog}>Cancel</button>
+        </div>
       </div>
     </div>,
     document.getElementById('__next')
@@ -37,5 +52,6 @@ Dialog.propTypes = {
   dialogContent: PropTypes.element,
   show: PropTypes.bool,
   hideDialog: PropTypes.func,
-  dialogCancelAction: PropTypes.func
+  dialogCancelAction: PropTypes.func,
+  dialogConfirmAction: PropTypes.func
 };

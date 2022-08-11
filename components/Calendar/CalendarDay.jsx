@@ -61,7 +61,9 @@ export default function CalendarDay() {
         dialogContent={<p>Content</p>}
         show={showDialog}
         hideDialog={toggleDialog}
-        dialogConfirmAction={toggleDialog}
+        dialogConfirmAction={() => {
+          console.log('cookies');
+        }}
         dialogCancelAction={() => {
           setTimeSlice([]);
         }}
