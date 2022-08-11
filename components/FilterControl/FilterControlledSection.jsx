@@ -25,6 +25,7 @@ export default function FilterControlledSection() {
         key={item.id}
         id={item.id}
         imgSrc={'/images/cat.jpg'}
+        details={item}
       />
     ));
 

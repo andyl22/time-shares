@@ -2,6 +2,12 @@ import Head from 'next/head';
 import Calendar from '../../components/Calendar/Calendar';
 import styles from './entity.module.scss';
 
+export function getStaticProps() {
+  return {
+    props: {}
+  };
+}
+
 export default function Entity() {
   return (
     <>
