@@ -4,7 +4,8 @@ import Dialog from '../Dialog/Dialog';
 import { useRef } from 'react';
 import { postHTTP } from '../../utilities/api';
 
-export default function CalendarDay() {
+export default function CalendarDay(props) {
+  const { date } = props;
   const [showDialog, setShowDialog] = useState(false);
   const [timeSlice, setTimeSlice] = useState([]);
   const thisNode = useRef();
@@ -50,7 +51,7 @@ export default function CalendarDay() {
 
   return (
     <div className={styles.calendarDayContainer}>
-      <div className={styles.dayHeader}>Date Here</div>
+      <div className={styles.dayHeader}>{date.format('MMM Do YY')}</div>
       <div
         className={styles.hourTimes}
         onMouseDown={listenToDrag}
