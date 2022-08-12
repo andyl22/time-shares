@@ -1,4 +1,7 @@
 .browsePage {
-  width: 100%;
-  justify-content: center;
+  .calendarContainer {
+    h1 {
+      text-align: center;
+    }
+  }
 }

@@ -1,11 +1,7 @@
 html,
 body {
-  display: flex;
-  min-height: 100vh;
-  min-width: 100vw;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  overflow-y: overlay;
 }
 
 * {
@@ -23,7 +19,7 @@ body {
 header,
 footer,
 main {
-  width: 100vw;
+  width: 100%;
 }
 
 main {

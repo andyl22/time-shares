@@ -29,6 +29,7 @@ export default function Entity() {
       </Head>
       <main className={styles.browsePage}>
         <div className={styles.calendarContainer}>
+          <h1>{entityDetails ? entityDetails.name : 'Loading...'}</h1>
           <Calendar />
         </div>
       </main>
