@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const Entity = new Schema({
+const Entity = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please provide a name for this entity'],
@@ -41,4 +41,4 @@ const Entity = new Schema({
   }
 });
 
-export default mongoose.models.Item || mongoose.model('Entity', Entity);
+export default mongoose.models.Entity || mongoose.model('Entity', Entity);
