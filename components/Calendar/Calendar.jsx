@@ -3,6 +3,8 @@ import CalendarDay from './CalendarDay';
 import moment from 'moment';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 export default function Calendar() {
   const [dates, setDates] = useState([]);
@@ -36,8 +38,12 @@ export default function Calendar() {
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.calendarControl}>
-        <button onClick={shiftBackward}>Previous Day</button>
-        <button onClick={shiftForward}>Next Day</button>
+        <button onClick={shiftBackward}>
+          <NavigateBeforeIcon />
+        </button>
+        <button onClick={shiftForward}>
+          <NavigateNextIcon />
+        </button>
       </div>
       <div className={styles.calendarDisplay}>{mappedDates}</div>
     </div>

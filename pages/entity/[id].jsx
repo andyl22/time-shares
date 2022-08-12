@@ -28,7 +28,9 @@ export default function Entity() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.browsePage}>
-        <Calendar />
+        <div className={styles.calendarContainer}>
+          <Calendar />
+        </div>
       </main>
     </>
   );
