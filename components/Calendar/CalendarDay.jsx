@@ -3,6 +3,7 @@ import styles from './CalendarDay.module.scss';
 import Dialog from '../Dialog/Dialog';
 import { useRef } from 'react';
 import { postHTTP } from '../../utilities/api';
+import PropTypes from 'prop-types';
 
 export default function CalendarDay(props) {
   const { date } = props;
@@ -82,3 +83,7 @@ export default function CalendarDay(props) {
     </div>
   );
 }
+
+CalendarDay.propTypes = {
+  date: PropTypes.object
+};

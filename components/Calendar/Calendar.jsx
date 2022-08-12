@@ -13,11 +13,33 @@ export default function Calendar() {
       tempDates.push(moment().add(i, 'days'));
     }
     setDates(tempDates);
-  });
+  }, []);
 
   const mappedDates = dates.map((date) => (
     <CalendarDay key={date} date={date} />
   ));
 
-  return <div className={styles.calendarContainer}>{mappedDates}</div>;
+  const shiftForward = () => {
+    setDates([
+      ...dates.slice(1, dates.length),
+      moment(dates[dates.length - 1]).add(1, 'days')
+    ]);
+  };
+
+  const shiftBackward = () => {
+    setDates([
+      moment(dates[0]).subtract(1, 'days'),
+      ...dates.slice(0, dates.length - 1)
+    ]);
+  };
+
+  return (
+    <div className={styles.calendarContainer}>
+      <div className={styles.calendarControl}>
+        <button onClick={shiftBackward}>Previous Day</button>
+        <button onClick={shiftForward}>Next Day</button>
+      </div>
+      <div className={styles.calendarDisplay}>{mappedDates}</div>
+    </div>
+  );
 }

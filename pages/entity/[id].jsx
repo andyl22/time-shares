@@ -11,8 +11,7 @@ export default function Entity() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!router) return;
-
+    if (!router || entityDetails) return;
     postHTTP('/getEntityById', { id: router.query.id })
       .then((res) => setEntityDetails(res))
       .catch((err) => console.log(err));

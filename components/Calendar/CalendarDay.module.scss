@@ -1,21 +1,28 @@
 .calendarDayContainer {
   border-right: 1px solid black;
   border-bottom: 1px solid black;
-  border-top: 1px solid black;
   height: 80%;
   overflow-y: overlay;
+  &:first-of-type {
+    border-left: 1px solid black;
+  }
   &:hover {
     cursor: pointer;
   }
   .dayHeader {
     text-align: center;
+    padding: 1rem;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
   }
   .timeUnit {
     list-style: none;
-    padding: 3rem 0;
-    border-top: 1px dashed whitesmoke;
-    border-bottom: 1px dashed whitesmoke;
+    padding: 3rem 0 3rem 0.5rem;
+    border-top: 2px dashed whitesmoke;
     user-select: none;
+    &:first-of-type {
+      border-top: none;
+    }
   }
   .color {
     background: lightblue;

@@ -22,13 +22,7 @@ export default function FilterControlledSection(props) {
   const mappedItems = entityData
     .filter((item) => item.category === activeFilter)
     .map((item) => (
-      <ItemDisplay
-        name={item.name}
-        key={item.id}
-        id={item.id}
-        imgSrc={'/images/cat.jpg'}
-        details={item}
-      />
+      <ItemDisplay key={item._id} imgSrc={'/images/cat.jpg'} details={item} />
     ));
 
   return (
