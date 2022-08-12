@@ -10,14 +10,18 @@
     cursor: pointer;
   }
   .dayHeader {
+    position: sticky;
+    left: 0;
+    top: 0;
     text-align: center;
     padding: 1rem;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
+    background: white;
   }
   .timeUnit {
     list-style: none;
-    padding: 3rem 0 3rem 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
     border-top: 2px dashed whitesmoke;
     user-select: none;
     &:first-of-type {
