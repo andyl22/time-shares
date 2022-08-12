@@ -4,17 +4,17 @@ import styles from './ItemDisplay.module.scss';
 import PropTypes from 'prop-types';
 
 export default function ItemDisplay(props) {
-  const { name, imgSrc, id, item } = props;
-  console.log(item);
+  const { imgSrc, details } = props;
 
   return (
     <Link
       href={{
-        pathname: `/entity/${id}`
+        pathname: `/entity/${details._id}`
       }}
+      key={details._id}
     >
       <a className={styles.mappedItem}>
-        <p className={styles.itemName}>{name}</p>
+        <p className={styles.itemName}>{details.name}</p>
         <Image
           src={imgSrc}
           width="300"
@@ -27,8 +27,6 @@ export default function ItemDisplay(props) {
 }
 
 ItemDisplay.propTypes = {
-  name: PropTypes.string,
   imgSrc: PropTypes.string,
-  id: PropTypes.string,
-  item: PropTypes.object
+  details: PropTypes.object
 };
