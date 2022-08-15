@@ -1,17 +1,20 @@
 import styles from './CalendarBooking.module.scss';
 import PropTypes from 'prop-types';
+import Dialog from '../Dialog/Dialog';
+import { useState } from 'react';
 
 export default function CalendarBooking(props) {
   const { timeSlot } = props;
+  const [showDialog, setShowDialog] = useState(false);
   const start = timeSlot[0] < timeSlot[1] ? timeSlot[0] : timeSlot[1];
   const end = timeSlot[1] < timeSlot[0] ? timeSlot[0] : timeSlot[1];
 
-  const clickHandler = () => {
-    console.log('test');
+  const toggleDialog = () => {
+    setShowDialog(!showDialog);
   };
 
   return (
-    <div className={styles.calendarBooking} onClick={clickHandler}>
+    <div className={styles.calendarBooking} onClick={toggleDialog}>
       <p>{`Booking from ${start} to ${end}. Add non-placeholder events here.`}</p>
       <style jsx>
         {`
@@ -32,6 +35,20 @@ export default function CalendarBooking(props) {
           }
         `}
       </style>
+      {showDialog ? (
+        <Dialog
+          dialogHeader="Booking"
+          dialogContent={<p>Content</p>}
+          show={showDialog}
+          hideDialog={toggleDialog}
+          dialogConfirmAction={() => {
+            console.log('confirm');
+          }}
+          dialogCancelAction={() => {
+            console.log('cancel');
+          }}
+        />
+      ) : null}
     </div>
   );
 }
