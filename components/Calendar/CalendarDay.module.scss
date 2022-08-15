@@ -5,6 +5,7 @@ $secondary-border-color: rgb(248, 246, 246);
   border-right: 1px solid $border-color;
   border-bottom: 1px solid $border-color;
   overflow-y: overlay;
+  position: relative;
   &:first-of-type {
     border-left: 1px solid $border-color;
   }
@@ -16,15 +17,18 @@ $secondary-border-color: rgb(248, 246, 246);
     left: 0;
     top: 0;
     text-align: center;
-    padding: 1rem;
+    height: 2rem;
     border-top: 1px solid $border-color;
     border-bottom: 2px solid $border-color;
     background: white;
     font-weight: 600;
   }
   .timeUnit {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
     list-style: none;
-    padding: 0.5rem 0 0.5rem 0.5rem;
+    height: 2rem;
     border-top: 2px dashed $secondary-border-color;
     user-select: none;
     &:first-of-type {
