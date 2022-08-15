@@ -2,9 +2,11 @@ import styles from './CalendarBooking.module.scss';
 import PropTypes from 'prop-types';
 
 export default function CalendarBooking(props) {
-  const { start, end } = props;
+  const { timeSlot } = props;
+  const start = timeSlot[0] < timeSlot[1] ? timeSlot[0] : timeSlot[1];
+  const end = timeSlot[1] < timeSlot[0] ? timeSlot[0] : timeSlot[1];
 
-  const clickHandler = (e) => {
+  const clickHandler = () => {
     console.log('test');
   };
 
@@ -24,6 +26,8 @@ export default function CalendarBooking(props) {
             font-weight: 600;
             padding: 0.1rem 0.5rem;
             border-radius: 0.2rem;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
           }
         `}
       </style>
@@ -32,6 +36,5 @@ export default function CalendarBooking(props) {
 }
 
 CalendarBooking.propTypes = {
-  start: PropTypes.number,
-  end: PropTypes.number
+  timeSlot: PropTypes.array
 };

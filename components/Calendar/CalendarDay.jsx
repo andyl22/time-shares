@@ -69,9 +69,7 @@ export default function CalendarDay(props) {
   ));
 
   const mappedBookings = bookedTimes.map((timeSlot) => {
-    return (
-      <CalendarBooking key={timeSlot} start={timeSlot[0]} end={timeSlot[1]} />
-    );
+    return <CalendarBooking key={timeSlot} timeSlot={timeSlot} />;
   });
 
   return (

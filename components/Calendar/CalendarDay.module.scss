@@ -4,7 +4,7 @@ $secondary-border-color: rgb(248, 246, 246);
 .calendarDayContainer {
   border-right: 1px solid $border-color;
   border-bottom: 1px solid $border-color;
-  overflow-y: overlay;
+  overflow: auto;
   position: relative;
   &:first-of-type {
     border-left: 1px solid $border-color;
