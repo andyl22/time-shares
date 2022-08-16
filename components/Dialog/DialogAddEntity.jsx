@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 // component user should pass the showDialog and toggleDialog to this dialog type
 export default function DialogAddEntity(props) {
-  const { showDialog, toggleDialog } = props;
+  const { showDialog, toggleDialog, successAction } = props;
   const [form, setForm] = useState({
     name: '',
     description: '',
@@ -33,8 +33,17 @@ export default function DialogAddEntity(props) {
   };
 
   const submitAction = () => {
-    postHTTP('/createNewBooking', form)
-      .then((res) => console.log(res))
+    postHTTP('/createNewEntity', form)
+      .then((res) => successAction(res.entity))
+      .then(() =>
+        setForm({
+          name: '',
+          description: '',
+          rate: '',
+          category: '',
+          image: ''
+        })
+      )
       .catch((err) => console.log(err));
   };
 
@@ -95,5 +104,6 @@ export default function DialogAddEntity(props) {
 
 DialogAddEntity.propTypes = {
   showDialog: PropTypes.bool,
-  toggleDialog: PropTypes.func
+  toggleDialog: PropTypes.func,
+  successAction: PropTypes.func
 };

@@ -6,20 +6,25 @@ import styles from './browse.module.scss';
 
 export async function getStaticProps() {
   // eslint-disable-next-line no-undef
-  const entityData = await fetch(`${process.env.API_URI}/api/getEntity`)
+  const fetchedEntityData = await fetch(`${process.env.API_URI}/api/getEntity`)
     .then((res) => res.json())
     .catch((err) => console.log(err));
   return {
-    props: { entityData }
+    props: { fetchedEntityData }
   };
 }
 
 export default function browse(props) {
-  const { entityData } = props;
+  const { fetchedEntityData } = props;
+  const [entityData, setEntityData] = useState(fetchedEntityData);
   const [showDialog, setShowDialog] = useState(false);
 
   const toggleDialog = () => {
     setShowDialog(!showDialog);
+  };
+
+  const addSuccessAction = (createdEntity) => {
+    setEntityData([...entityData, createdEntity]);
   };
 
   return (
@@ -35,7 +40,11 @@ export default function browse(props) {
       <main className={styles.browsePage}>
         <button onClick={toggleDialog}>Create a new booking</button>
         <FilterControlledSection entityData={entityData} />
-        <DialogAddEntity toggleDialog={toggleDialog} showDialog={showDialog} />
+        <DialogAddEntity
+          toggleDialog={toggleDialog}
+          showDialog={showDialog}
+          successAction={addSuccessAction}
+        />
       </main>
     </>
   );

@@ -84,15 +84,7 @@ export default function CalendarDay(props) {
         show={showDialog}
         hideDialog={toggleDialog}
         dialogConfirmAction={() => {
-          postHTTP('/createNewBooking', {
-            name: 'test',
-            description: 'test',
-            rate: 35,
-            image: 'test',
-            category: 'test'
-          })
-            .then(() => persistDialog())
-            .catch((err) => console.log(err));
+          persistDialog();
         }}
         dialogCancelAction={() => {
           setTimeSlice([]);
