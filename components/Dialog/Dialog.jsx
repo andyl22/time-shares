@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 export default function Dialog(props) {
   const {
     dialogHeader,
-    dialogContent,
+    children,
     show,
     hideDialog,
     dialogCancelAction,
@@ -36,7 +36,7 @@ export default function Dialog(props) {
             <CloseIcon fontSize="small" />
           </button>
         </div>
-        <div className={styles.dialogContentContainer}>{dialogContent}</div>
+        <div className={styles.childrenContainer}>{children}</div>
         <div className={styles.dialogActionButtons}>
           <button onClick={confirmDialog}>Confirm</button>
           <button onClick={cancelDialog}>Cancel</button>
@@ -49,7 +49,7 @@ export default function Dialog(props) {
 
 Dialog.propTypes = {
   dialogHeader: PropTypes.string,
-  dialogContent: PropTypes.element,
+  children: PropTypes.element,
   show: PropTypes.bool,
   hideDialog: PropTypes.func,
   dialogCancelAction: PropTypes.func,

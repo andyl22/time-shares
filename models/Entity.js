@@ -19,8 +19,7 @@ const Entity = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'Please provide an image link for this entity.'],
-    maxlength: [4000, 'Item link must be less than 4000 characters']
+    required: [true, 'Please provide an image link for this entity.']
   },
   visits: {
     type: Number,

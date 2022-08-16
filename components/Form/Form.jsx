@@ -6,5 +6,5 @@ export default function Form({ children }) {
 }
 
 Form.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.array
 };

@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import Dialog from '../../components/Dialog/Dialog';
 import FilterControlledSection from '../../components/FilterControl/FilterControlledSection';
-import FormAddEntity from '../../components/Form/FormAddEntity';
+import DialogAddEntity from '../../components/Dialog/DialogAddEntity';
 import styles from './browse.module.scss';
 
 export async function getStaticProps() {
@@ -36,14 +35,7 @@ export default function browse(props) {
       <main className={styles.browsePage}>
         <button onClick={toggleDialog}>Create a new booking</button>
         <FilterControlledSection entityData={entityData} />
-        <Dialog
-          show={showDialog}
-          dialogHeader={'Add Object'}
-          dialogContent={<FormAddEntity />}
-          hideDialog={toggleDialog}
-          dialogConfirmAction={() => {}}
-          dialogCancelAction={() => {}}
-        />
+        <DialogAddEntity toggleDialog={toggleDialog} showDialog={showDialog} />
       </main>
     </>
   );

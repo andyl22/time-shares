@@ -81,7 +81,6 @@ export default function CalendarDay(props) {
       </div>
       <Dialog
         dialogHeader="Book a time"
-        dialogContent={<p>Content</p>}
         show={showDialog}
         hideDialog={toggleDialog}
         dialogConfirmAction={() => {
@@ -98,7 +97,9 @@ export default function CalendarDay(props) {
         dialogCancelAction={() => {
           setTimeSlice([]);
         }}
-      />
+      >
+        <p>Content</p>
+      </Dialog>
     </div>
   );
 }
