@@ -1,4 +1,13 @@
 .formContainer {
   display: flex;
+  gap: 0.5rem;
   flex-direction: column;
+  input {
+    border-radius: 0.2rem;
+    border: 1px solid gray;
+    padding: 0.1rem;
+  }
+  label {
+    font-size: 0.8rem;
+  }
 }
