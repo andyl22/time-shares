@@ -10,12 +10,16 @@ export async function getStaticProps() {
     .then((res) => res.json())
     .catch((err) => console.log(err));
   return {
-    props: { fetchedEntityData }
+    props: {
+      fetchedEntityData,
+      // eslint-disable-next-line no-undef
+      unsplashAccess: process.env.UNSPLASH_ACCESS
+    }
   };
 }
 
 export default function browse(props) {
-  const { fetchedEntityData } = props;
+  const { fetchedEntityData, unsplashAccess } = props;
   const [entityData, setEntityData] = useState(fetchedEntityData);
   const [showDialog, setShowDialog] = useState(false);
 
@@ -44,6 +48,7 @@ export default function browse(props) {
           toggleDialog={toggleDialog}
           showDialog={showDialog}
           successAction={addSuccessAction}
+          unsplashAccess={unsplashAccess}
         />
       </main>
     </>

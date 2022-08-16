@@ -3,7 +3,6 @@ import styles from './CalendarDay.module.scss';
 import Dialog from '../Dialog/Dialog';
 import CalendarBooking from './CalendarBooking';
 import { useRef } from 'react';
-import { postHTTP } from '../../utilities/api';
 import PropTypes from 'prop-types';
 
 export default function CalendarDay(props) {

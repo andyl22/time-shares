@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 // component user should pass the showDialog and toggleDialog to this dialog type
 export default function DialogAddEntity(props) {
-  const { showDialog, toggleDialog, successAction } = props;
+  const { showDialog, toggleDialog, successAction, unsplashAccess } = props;
   const [form, setForm] = useState({
     name: '',
     description: '',
@@ -22,18 +22,30 @@ export default function DialogAddEntity(props) {
     setForm({ ...form, [key]: value });
   };
 
-  const handleFileUpload = (e) => {
-    const key = e.target.id;
+  const convertImageForStorage = (file) => {
     const fReader = new FileReader();
-    fReader.readAsDataURL(e.target.files[0]);
+    fReader.readAsDataURL(file);
     fReader.onloadend = (e) => {
-      setForm({ ...form, [key]: e.target.result });
-      console.log(e.target.result);
+      setForm({ ...form, image: e.target.result });
     };
   };
 
-  const submitAction = () => {
-    postHTTP('/createNewEntity', form)
+  const handleFileUpload = (e) => {
+    convertImageForStorage(e.target.files[0]);
+  };
+
+  const submitAction = async () => {
+    const postBody =
+      form.image === ''
+        ? await fetch(
+            `https://api.unsplash.com/search/photos?query=${form.name}&orientation=squarish&client_id=${unsplashAccess}`
+          )
+            .then((res) => res.json())
+            .then((res) => res.results[Math.floor(Math.random() * 10)])
+            .then((res) => ({ ...form, image: res.urls.small }))
+        : form;
+
+    postHTTP('/createNewEntity', postBody)
       .then((res) => successAction(res.entity))
       .then(() =>
         setForm({
@@ -105,5 +117,6 @@ export default function DialogAddEntity(props) {
 DialogAddEntity.propTypes = {
   showDialog: PropTypes.bool,
   toggleDialog: PropTypes.func,
-  successAction: PropTypes.func
+  successAction: PropTypes.func,
+  unsplashAccess: PropTypes.string
 };
