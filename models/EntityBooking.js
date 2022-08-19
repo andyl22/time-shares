@@ -1,18 +1,22 @@
 import mongoose, { Schema } from 'mongoose';
 
 const EntityBooking = new mongoose.Schema({
-  startDate: {
+  date: {
     type: Date,
-    required: [true, 'Please provide a start date']
+    required: true
   },
-  endDate: {
-    type: Date,
-    required: [true, 'Please provide an end date']
+  startTime: {
+    type: Number,
+    required: true
+  },
+  endTime: {
+    type: Number,
+    required: true
   },
   entityId: {
     type: Schema.Types.ObjectId,
     ref: 'Entity',
-    required: [true, 'Please provide an entity id for this booking.']
+    required: true
   }
 });
 

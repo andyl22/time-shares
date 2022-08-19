@@ -5,7 +5,9 @@ import Calendar from '../../components/Calendar/Calendar';
 import { postHTTP } from '../../utilities/api';
 import styles from './entity.module.scss';
 
-const EntityContext = createContext();
+const EntityContext = createContext([{}, () => {}]);
+
+export { EntityContext };
 
 export default function Entity() {
   const [entityDetails, setEntityDetails] = useState();
