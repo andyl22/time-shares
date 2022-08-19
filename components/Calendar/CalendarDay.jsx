@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import styles from './CalendarDay.module.scss';
 import Dialog from '../Dialog/Dialog';
 import CalendarBooking from './CalendarBooking';
-import { useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { postHTTP } from '../../utilities/api';
 
 export default function CalendarDay(props) {
   const { date } = props;
@@ -12,13 +12,20 @@ export default function CalendarDay(props) {
   /* TBD: query for times for this specific date that is possed in the props to retrieve already booked times*/
   const [bookedTimes, setBookedTimes] = useState([]);
   const timeUnitsNode = useRef();
+  const user = useContext(EntityDetails);
+  console.log(user);
 
   const toggleDialog = (e) => {
     e.stopPropagation();
     setShowDialog(!showDialog);
   };
 
-  const persistDialog = () => {
+  const persistDialog = async () => {
+    const body = {
+      startTime: timeSlice[0],
+      endTime: timeSlice[1]
+    };
+    postHTTP('/createNewEntityBooking', body).then((res) => console.log(res));
     setBookedTimes([...bookedTimes, timeSlice]);
     setTimeSlice([]);
   };
