@@ -4,10 +4,11 @@ import CalendarBooking from './CalendarBooking';
 import { useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { postHTTP } from '../../utilities/api';
-import { EntityContext } from '../../pages/entity/[id].jsx';
+import { EntityContext } from '../../context/EntityContext';
 
 export default function CalendarDay(props) {
-  const { date } = props;
+  const { date, bookings } = props;
+  console.log(bookings);
   const [showDialog, setShowDialog] = useState(false);
   const [timeSlice, setTimeSlice] = useState([]);
   /* TBD: query for times for this specific date that is possed in the props to retrieve already booked times*/
@@ -107,5 +108,6 @@ export default function CalendarDay(props) {
 }
 
 CalendarDay.propTypes = {
-  date: PropTypes.object
+  date: PropTypes.object,
+  bookings: PropTypes.array
 };

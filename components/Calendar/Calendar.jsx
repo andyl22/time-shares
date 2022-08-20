@@ -1,13 +1,16 @@
 import styles from './Calendar.module.scss';
 import CalendarDay from './CalendarDay';
 import moment from 'moment';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { postHTTP } from '../../utilities/api';
+import { EntityContext } from '../../context/EntityContext';
 
 export default function Calendar() {
   const [dates, setDates] = useState([]);
+  const [mappedDates, setMappedDates] = useState([]);
+  const entityDetails = useContext(EntityContext);
 
   useEffect(() => {
     let tempDates = [moment()];
@@ -17,9 +20,22 @@ export default function Calendar() {
     setDates(tempDates);
   }, []);
 
-  const mappedDates = dates.map((date) => (
-    <CalendarDay key={date} date={date} />
-  ));
+  useEffect(() => {
+    if (!entityDetails && dates.length < 1) return;
+    const updateMappedDates = async () => {
+      setMappedDates(
+        await Promise.all(
+          dates.map(async (date) => {
+            const bookings = await postHTTP('/getEntityBookingsById', {
+              id: entityDetails._id
+            });
+            return <CalendarDay key={date} date={date} bookings={bookings} />;
+          })
+        )
+      );
+    };
+    updateMappedDates();
+  }, [dates]);
 
   const shiftForward = () => {
     setDates([
@@ -45,7 +61,10 @@ export default function Calendar() {
           <NavigateNextIcon />
         </button>
       </div>
-      <div className={styles.calendarDisplay}>{mappedDates}</div>
+      <div className={styles.calendarDisplay}>
+        {mappedDates ? mappedDates : 'loading'}
+      </div>
+      <button onClick={() => console.log(entityDetails)}>Click</button>
     </div>
   );
 }

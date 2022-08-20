@@ -1,13 +1,10 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 import Calendar from '../../components/Calendar/Calendar';
 import { postHTTP } from '../../utilities/api';
 import styles from './entity.module.scss';
-
-const EntityContext = createContext([{}, () => {}]);
-
-export { EntityContext };
+import EntityContextProvider from '../../context/EntityContext';
 
 export default function Entity() {
   const [entityDetails, setEntityDetails] = useState();
@@ -21,7 +18,7 @@ export default function Entity() {
   }, [router]);
 
   return (
-    <EntityContext.Provider value={entityDetails}>
+    <EntityContextProvider entityDetails={entityDetails}>
       <Head>
         <title>Time Shares</title>
         <meta
@@ -36,6 +33,6 @@ export default function Entity() {
           <Calendar />
         </div>
       </main>
-    </EntityContext.Provider>
+    </EntityContextProvider>
   );
 }
