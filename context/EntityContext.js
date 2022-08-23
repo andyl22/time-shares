@@ -8,7 +8,13 @@ export default function EntityContextProvider(props) {
 
   return (
     <EntityContext.Provider value={entityDetails}>
-      {entityDetails ? children : <p>Loading Context</p>}
+      {entityDetails ? (
+        children
+      ) : (
+        <main>
+          <p>Loading Context</p>
+        </main>
+      )}
     </EntityContext.Provider>
   );
 }

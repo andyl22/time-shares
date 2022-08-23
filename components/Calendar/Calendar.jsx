@@ -29,7 +29,15 @@ export default function Calendar() {
             const bookings = await postHTTP('/getEntityBookingsById', {
               id: entityDetails._id
             });
-            return <CalendarDay key={date} date={date} bookings={bookings} />;
+            return (
+              <CalendarDay
+                key={date}
+                date={date}
+                bookings={bookings.filter(
+                  (booking) => moment(booking.date).day() === date.day()
+                )}
+              />
+            );
           })
         )
       );

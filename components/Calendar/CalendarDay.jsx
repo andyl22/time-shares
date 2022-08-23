@@ -8,11 +8,12 @@ import { EntityContext } from '../../context/EntityContext';
 
 export default function CalendarDay(props) {
   const { date, bookings } = props;
-  console.log(bookings);
   const [showDialog, setShowDialog] = useState(false);
   const [timeSlice, setTimeSlice] = useState([]);
   /* TBD: query for times for this specific date that is possed in the props to retrieve already booked times*/
-  const [bookedTimes, setBookedTimes] = useState([]);
+  const [bookedTimes, setBookedTimes] = useState(
+    bookings.map((booking) => [booking.startTime, booking.endTime])
+  );
   const timeUnitsNode = useRef();
   const entityDetails = useContext(EntityContext);
 
