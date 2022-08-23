@@ -1,6 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
 
 const EntityBooking = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     required: true

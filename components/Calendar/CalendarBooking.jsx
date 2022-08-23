@@ -4,10 +4,11 @@ import Dialog from '../Dialog/Dialog';
 import { useState } from 'react';
 
 export default function CalendarBooking(props) {
-  const { timeSlot } = props;
+  const { bookingDetails } = props;
+  const { name, description, startTime, endTime } = bookingDetails;
   const [showDialog, setShowDialog] = useState(false);
-  const start = timeSlot[0] < timeSlot[1] ? timeSlot[0] : timeSlot[1];
-  const end = timeSlot[1] < timeSlot[0] ? timeSlot[0] : timeSlot[1];
+  const start = startTime < endTime ? startTime : endTime;
+  const end = endTime < startTime ? startTime : endTime;
 
   const toggleDialog = () => {
     setShowDialog(!showDialog);
@@ -15,10 +16,15 @@ export default function CalendarBooking(props) {
 
   return (
     <div className={styles.calendarBooking} onClick={toggleDialog}>
-      <p>{`Booking from ${start} to ${end}. Add non-placeholder events here.`}</p>
+      <p>{name}</p>
+      <p>{description}</p>
       <style jsx>
         {`
           div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            align-items: center;
             background: #5f88ff;
             position: absolute;
             top: ${start * 2 + 2}rem;

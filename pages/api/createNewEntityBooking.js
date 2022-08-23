@@ -2,10 +2,12 @@ import EntityBooking from '../../models/EntityBooking';
 import dbConnect from '../../utilities/mongo';
 
 export default async function handler(req, res) {
-  const { date, startTime, endTime, entityId } = req.body;
+  const { name, description, date, startTime, endTime, entityId } = req.body;
   await dbConnect();
   try {
     const createBooking = await EntityBooking.create({
+      name,
+      description,
       date,
       startTime,
       endTime,

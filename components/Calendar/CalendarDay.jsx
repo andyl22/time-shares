@@ -5,6 +5,7 @@ import { useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { postHTTP } from '../../utilities/api';
 import { EntityContext } from '../../context/EntityContext';
+import Form from '../Form/Form';
 
 export default function CalendarDay(props) {
   const { date, bookings } = props;
@@ -12,8 +13,18 @@ export default function CalendarDay(props) {
   const [timeSlice, setTimeSlice] = useState([]);
   /* TBD: query for times for this specific date that is possed in the props to retrieve already booked times*/
   const [bookedTimes, setBookedTimes] = useState(
-    bookings.map((booking) => [booking.startTime, booking.endTime])
+    bookings.map((booking) => ({
+      name: booking.name,
+      description: booking.description,
+      startTime: booking.startTime,
+      endTime: booking.endTime
+    }))
   );
+
+  const [createBookingForm, setCreateBookingForm] = useState({
+    name: '',
+    description: ''
+  });
   const timeUnitsNode = useRef();
   const entityDetails = useContext(EntityContext);
 
@@ -27,12 +38,20 @@ export default function CalendarDay(props) {
       date: date.toDate(),
       startTime: timeSlice[0],
       endTime: timeSlice[1],
-      entityId: entityDetails._id
+      entityId: entityDetails._id,
+      ...createBookingForm
     };
     await postHTTP('/createNewEntityBooking', body).then((res) =>
       console.log(res)
     );
-    setBookedTimes([...bookedTimes, timeSlice]);
+    setBookedTimes([
+      ...bookedTimes,
+      {
+        ...createBookingForm,
+        startTime: timeSlice[0],
+        endTime: timeSlice[1]
+      }
+    ]);
     setTimeSlice([]);
   };
 
@@ -80,9 +99,22 @@ export default function CalendarDay(props) {
     </li>
   ));
 
-  const mappedBookings = bookedTimes.map((timeSlot) => {
-    return <CalendarBooking key={timeSlot} timeSlot={timeSlot} />;
+  const mappedBookings = bookedTimes.map((bookingDetails) => {
+    return (
+      <CalendarBooking
+        key={`${bookingDetails.name}-${bookingDetails.description}`}
+        bookingDetails={bookingDetails}
+      />
+    );
   });
+
+  const formChange = (e) => {
+    setCreateBookingForm({
+      ...createBookingForm,
+      [e.target.id]: e.target.value
+    });
+    console.log(createBookingForm);
+  };
 
   return (
     <div className={styles.calendarDayContainer}>
@@ -102,7 +134,28 @@ export default function CalendarDay(props) {
           setTimeSlice([]);
         }}
       >
-        <p>Content</p>
+        <div className={styles.formContainer}>
+          <Form>
+            <div className={styles.formInput}>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                value={createBookingForm.name}
+                id="name"
+                onChange={formChange}
+              />
+            </div>
+            <div className={styles.formInput}>
+              <label htmlFor="description">Description</label>
+              <input
+                type="text"
+                value={createBookingForm.description}
+                id="description"
+                onChange={formChange}
+              />
+            </div>
+          </Form>
+        </div>
       </Dialog>
     </div>
   );
