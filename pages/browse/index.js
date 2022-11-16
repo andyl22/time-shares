@@ -4,7 +4,7 @@ import FilterControlledSection from '../../components/FilterControl/FilterContro
 import DialogAddEntity from '../../components/Dialog/DialogAddEntity';
 import styles from './browse.module.scss';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // eslint-disable-next-line no-undef
   const fetchedEntityData = await fetch(`${process.env.API_URI}/api/getEntity`)
     .then((res) => res.json())
