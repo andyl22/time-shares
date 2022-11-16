@@ -14,6 +14,7 @@ export default function CalendarDay(props) {
   /* TBD: query for times for this specific date that is possed in the props to retrieve already booked times*/
   const [bookedTimes, setBookedTimes] = useState(
     bookings.map((booking) => ({
+      date: date,
       name: booking.name,
       description: booking.description,
       startTime: booking.startTime,
