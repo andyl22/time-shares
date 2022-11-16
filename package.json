@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "deploy": "next build && next export && touch ./out/.nojekyll && gh-pages -t true -d out",
+    "build": "next build && next export && touch ./out/.nojekyll",
     "start": "next start",
     "lint": "next lint"
   },
@@ -29,5 +30,6 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1"
-  }
+  },
+  "homepage": "https://andyl22.github.io/time-shares"
 }
