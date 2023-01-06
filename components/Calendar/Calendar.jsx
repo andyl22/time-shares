@@ -34,7 +34,7 @@ export default function Calendar() {
                 key={date}
                 date={date}
                 bookings={bookings.filter(
-                  (booking) => moment(booking.date).day() === date.day()
+                  (booking) => moment(booking.dayBooked).day() === date.day()
                 )}
               />
             );

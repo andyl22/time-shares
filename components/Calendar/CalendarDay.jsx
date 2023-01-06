@@ -6,17 +6,19 @@ import PropTypes from 'prop-types';
 import { postHTTP } from '../../utilities/api';
 import { EntityContext } from '../../context/EntityContext';
 import Form from '../Form/Form';
+import moment from 'moment/moment';
 
 export default function CalendarDay(props) {
   const { date, bookings } = props;
   const [showDialog, setShowDialog] = useState(false);
   const [timeSlice, setTimeSlice] = useState([]);
-  /* TBD: query for times for this specific date that is possed in the props to retrieve already booked times*/
+
   const [bookedTimes, setBookedTimes] = useState(
     bookings.map((booking) => ({
-      date: date,
       name: booking.name,
       description: booking.description,
+      dateOfBooking: booking.dateOfBooking,
+      dayBooked: booking.dayBooked,
       startTime: booking.startTime,
       endTime: booking.endTime
     }))
@@ -35,24 +37,20 @@ export default function CalendarDay(props) {
   };
 
   const persistDialog = async () => {
+    const startTime = timeSlice[0] < timeSlice[1] ? timeSlice[0] : timeSlice[1];
+    const endTime = timeSlice[1] < timeSlice[0] ? timeSlice[0] : timeSlice[1];
     const body = {
-      date: date.toDate(),
-      startTime: timeSlice[0],
-      endTime: timeSlice[1],
+      dateOfBooking: moment().toDate(),
+      dayBooked: moment(date).format('MM/DD/YYYY'),
+      startTime,
+      endTime,
       entityId: entityDetails._id,
       ...createBookingForm
     };
     await postHTTP('/createNewEntityBooking', body).then((res) =>
       console.log(res)
     );
-    setBookedTimes([
-      ...bookedTimes,
-      {
-        ...createBookingForm,
-        startTime: timeSlice[0],
-        endTime: timeSlice[1]
-      }
-    ]);
+    setBookedTimes([...bookedTimes, body]);
     setTimeSlice([]);
   };
 

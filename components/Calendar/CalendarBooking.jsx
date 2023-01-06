@@ -2,17 +2,27 @@ import styles from './CalendarBooking.module.scss';
 import PropTypes from 'prop-types';
 import Dialog from '../Dialog/Dialog';
 import { useState } from 'react';
+import moment from 'moment';
 
 export default function CalendarBooking(props) {
   const { bookingDetails } = props;
-  const { date, name, description, startTime, endTime } = bookingDetails;
+  const [bookingData, setBookingData] = useState(bookingDetails);
+  const [formData, setFormData] = useState(bookingDetails);
   const [showDialog, setShowDialog] = useState(false);
-  const start = startTime < endTime ? startTime : endTime;
-  const end = endTime < startTime ? startTime : endTime;
+  const { startTime, endTime, name, description } = bookingData;
 
   const toggleDialog = () => {
     setShowDialog(!showDialog);
-    console.log(bookingDetails);
+  };
+
+  const handleChange = (e) => {
+    let newValue = e.target.value;
+    setFormData({ ...formData, [e.target.id]: newValue });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setBookingData(formData);
   };
 
   return (
@@ -31,28 +41,33 @@ export default function CalendarBooking(props) {
             console.log('cancel');
           }}
         >
-          <form
-            className={styles.editBookingForm}
-            onSubmit={(e) => {
-              e.preventDefault();
-              console.log('submitted');
-            }}
-          >
+          <form className={styles.editBookingForm} onSubmit={handleSubmit}>
             <div className={styles.formField}>
               <label htmlFor="bookingDate">Booking Date</label>
               <input
                 type="date"
-                id="bookingDate"
-                value={date.format('YYYY-MM-DD')}
+                id="dayBooked"
+                value={moment(formData.dayBooked).format('YYYY-MM-DD')}
+                onChange={handleChange}
               />
             </div>
             <div className={styles.formField}>
               <label htmlFor="bookingStart">Start</label>
-              <input type="text" id="bookingStart" value={start} />
+              <input
+                type="text"
+                id="startTime"
+                value={formData.startTime}
+                onChange={handleChange}
+              />
             </div>
             <div className={styles.formField}>
               <label htmlFor="bookingEnd">End</label>
-              <input type="text" id="bookingEnd" value={end} />
+              <input
+                type="text"
+                id="endTime"
+                value={formData.endTime}
+                onChange={handleChange}
+              />
             </div>
             <button type="submit">Submit</button>
           </form>
@@ -67,9 +82,9 @@ export default function CalendarBooking(props) {
             align-items: center;
             background: #5f88ff;
             position: absolute;
-            top: ${start * 2 + 2}rem;
+            top: ${startTime * 2 + 2}rem;
             right: 0;
-            height: ${(end - start) * 2 + 2}rem;
+            height: ${(endTime - startTime) * 2 + 2}rem;
             width: 75%;
             color: white;
             font-weight: 600;

@@ -7,9 +7,13 @@ const EntityBooking = new mongoose.Schema({
   },
   description: {
     type: String,
+    required: false
+  },
+  dateOfBooking: {
+    type: Date,
     required: true
   },
-  date: {
+  dayBooked: {
     type: Date,
     required: true
   },
