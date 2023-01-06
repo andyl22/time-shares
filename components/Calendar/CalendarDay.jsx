@@ -88,8 +88,8 @@ export default function CalendarDay(props) {
   const mappedHours = hours.map((time) => (
     <li
       className={`${styles.timeUnit} ${
-        time >= timeSlice[0] && time <= timeSlice[1] && styles.color
-      } ${time <= timeSlice[0] && time >= timeSlice[1] && styles.color}`}
+        time >= timeSlice[0] && time < timeSlice[1] && styles.color
+      } ${time <= timeSlice[0] && time > timeSlice[1] && styles.color}`}
       key={time}
       value={time}
       onMouseDown={listenToDrag}

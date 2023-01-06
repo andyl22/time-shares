@@ -22,6 +22,12 @@ export default function CalendarBooking(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.startTime > formData.endTime) {
+      [formData.startTime, formData.endTime] = [
+        formData.endTime,
+        formData.startTime
+      ];
+    }
     setBookingData(formData);
   };
 
@@ -80,11 +86,11 @@ export default function CalendarBooking(props) {
             flex-direction: column;
             gap: 0.2rem;
             align-items: center;
-            background: #5f88ff;
+            background: ${startTime === endTime ? '#955fff' : '#5f88ff'};
             position: absolute;
             top: ${startTime * 2 + 2}rem;
             right: 0;
-            height: ${(endTime - startTime) * 2 + 2}rem;
+            height: ${(endTime - startTime) * 2 || 2}rem;
             width: 75%;
             color: white;
             font-weight: 600;
